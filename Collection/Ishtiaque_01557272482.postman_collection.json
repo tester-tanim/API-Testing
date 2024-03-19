@@ -1,0 +1,692 @@
+{
+	"info": {
+		"_postman_id": "9e93944d-1e09-46b2-9c8c-78c008b17c9d",
+		"name": "Ishtiaque_01557272482",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23527817",
+		"_collection_link": "https://lively-crescent-679735.postman.co/workspace/It-bd~822b2b1a-e1ce-43e2-837f-ea26b5753899/collection/23527817-9e93944d-1e09-46b2-9c8c-78c008b17c9d?action=share&source=collection_link&creator=23527817"
+	},
+	"item": [
+		{
+			"name": "Get Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var JsonData = pm.response.json()\r",
+							"\r",
+							"\r",
+							"var status_code = pm.response.code\r",
+							"if(status_code==200){\r",
+							"pm.test(\"200 ; STATUS : SUCCESS\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"}\r",
+							"else if(status_code==201){\r",
+							"    pm.test(\"201 ; STATUS : CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})}\r",
+							"else if(status_code==202){\r",
+							"    pm.test(\"202 ; STATUS : ACCEPTED\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"})}\r",
+							"else if(status_code==400){\r",
+							"    pm.test(\"400 ; STATUS : BAD REQUEST\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})}\r",
+							"else if(status_code==401){\r",
+							"    pm.test(\"401 ; STATUS : UNAUTHORIZED\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})}\r",
+							"else if(status_code==402){\r",
+							"    pm.test(\"402 ; STATUS : PAYMENT REQUIRED\", function () {\r",
+							"    pm.response.to.have.status(402);\r",
+							"})}\r",
+							"else if(status_code==403){\r",
+							"    pm.test(\"403 ; STATUS : FORBIDDEN\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"})}\r",
+							"else if(status_code==404){\r",
+							"    pm.test(\"404 ; STATUS : NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})}\r",
+							"else if(status_code==405){\r",
+							"    pm.test(\"405 ; STATUS : METHOD NOT ALLOWED\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"})}\r",
+							"else if(status_code==500){\r",
+							"    pm.test(\"500 ; STATUS : INTERNAL SERVER ERROR\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"})}\r",
+							"else if(status_code==501){\r",
+							"    pm.test(\"501 ; STATUS : NOT IMPLEMENTED\", function () {\r",
+							"    pm.response.to.have.status(501);\r",
+							"})}\r",
+							"else if(status_code==502){\r",
+							"    pm.test(\"502 ; STATUS : BAD GATEWAY\", function () {\r",
+							"    pm.response.to.have.status(502);\r",
+							"})}\r",
+							"else if(status_code==503){\r",
+							"    pm.test(\"503 ; STATUS : SERVICE UNAVAILABLE\", function () {\r",
+							"    pm.response.to.have.status(503);\r",
+							"})}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/studentsDetails",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var firstname = pm.variables.replaceIn(\"{{$randomFirstName}}\")\r",
+							"console.log(\"First Name: \"+firstname)\r",
+							"pm.environment.set(\"first_name\",firstname)\r",
+							"\r",
+							"var lastname = pm.variables.replaceIn(\"{{$randomLastName}}\")\r",
+							"console.log(\"Middle Name: \"+lastname)\r",
+							"pm.environment.set(\"middle_name\",lastname)\r",
+							"\r",
+							"var lastname = pm.variables.replaceIn(\"{{$randomLastName}}\")\r",
+							"console.log(\"Last Name: \"+lastname)\r",
+							"pm.environment.set(\"last_name\",lastname)\r",
+							"\r",
+							"const moment = require('moment')\r",
+							"const today = moment()\r",
+							"console.log(today.format(\"DD/MM/YYYY\"))\r",
+							"pm.environment.set(\"date_of_birth\", today.add(2,'d').format(\"DD/MM/YYYY\"))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"var jsonData = pm.response.json()\r",
+							"pm.environment.set(\"id\", jsonData.id)\r",
+							"console.log(jsonData.id)\r",
+							"\r",
+							"var JsonData = pm.response.json()\r",
+							"\r",
+							"var status_code = pm.response.code\r",
+							"if(status_code==200){\r",
+							"pm.test(\"200 ; STATUS : SUCCESS\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"}\r",
+							"else if(status_code==201){\r",
+							"    pm.test(\"201 ; STATUS : CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})}\r",
+							"else if(status_code==202){\r",
+							"    pm.test(\"202 ; STATUS : ACCEPTED\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"})}\r",
+							"else if(status_code==400){\r",
+							"    pm.test(\"400 ; STATUS : BAD REQUEST\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})}\r",
+							"else if(status_code==401){\r",
+							"    pm.test(\"401 ; STATUS : UNAUTHORIZED\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})}\r",
+							"else if(status_code==402){\r",
+							"    pm.test(\"402 ; STATUS : PAYMENT REQUIRED\", function () {\r",
+							"    pm.response.to.have.status(402);\r",
+							"})}\r",
+							"else if(status_code==403){\r",
+							"    pm.test(\"403 ; STATUS : FORBIDDEN\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"})}\r",
+							"else if(status_code==404){\r",
+							"    pm.test(\"404 ; STATUS : NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})}\r",
+							"else if(status_code==405){\r",
+							"    pm.test(\"405 ; STATUS : METHOD NOT ALLOWED\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"})}\r",
+							"else if(status_code==500){\r",
+							"    pm.test(\"500 ; STATUS : INTERNAL SERVER ERROR\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"})}\r",
+							"else if(status_code==501){\r",
+							"    pm.test(\"501 ; STATUS : NOT IMPLEMENTED\", function () {\r",
+							"    pm.response.to.have.status(501);\r",
+							"})}\r",
+							"else if(status_code==502){\r",
+							"    pm.test(\"502 ; STATUS : BAD GATEWAY\", function () {\r",
+							"    pm.response.to.have.status(502);\r",
+							"})}\r",
+							"else if(status_code==503){\r",
+							"    pm.test(\"503 ; STATUS : SERVICE UNAVAILABLE\", function () {\r",
+							"    pm.response.to.have.status(503);\r",
+							"})}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"first_name\": \"{{first_name}}\", \r\n\"middle_name\": \"{{middle_name}}\", \r\n\"last_name\": \"{{last_name}}\", \r\n\"date_of_birth\": \"{{date_of_birth}}\" \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/studentsDetails",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Specific Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var status_code = pm.response.code\r",
+							"if(status_code==200){\r",
+							"pm.test(\"200 ; STATUS : SUCCESS\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json()\r",
+							"pm.test(\"ID Validation\", function () {\r",
+							"    pm.expect(jsonData.data.id).to.eql(Number(pm.environment.get(\"id\")));\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"First Name Validation\", function () {\r",
+							"    pm.expect(jsonData.data.first_name).to.eql(pm.environment.get(\"first_name\"));\r",
+							"});\r",
+							"pm.test(\"Middle Name Validation\", function () {\r",
+							"    pm.expect(jsonData.data.middle_name).to.eql(pm.environment.get(\"middle_name\"));\r",
+							"});\r",
+							"pm.test(\"Last Name Validation\", function () {\r",
+							"    pm.expect(jsonData.data.last_name).to.eql(pm.environment.get(\"last_name\"));\r",
+							"});\r",
+							"pm.test(\"Date of Birth Validation\" ,function () {\r",
+							"    pm.expect(jsonData.data.date_of_birth).to.eql(pm.environment.get(\"date_of_birth\"));\r",
+							"});\r",
+							"}\r",
+							"else if(status_code==201){\r",
+							"    pm.test(\"201 ; STATUS : CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})}\r",
+							"else if(status_code==202){\r",
+							"    pm.test(\"202 ; STATUS : ACCEPTED\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"})}\r",
+							"else if(status_code==400){\r",
+							"    pm.test(\"400 ; STATUS : BAD REQUEST\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})}\r",
+							"else if(status_code==401){\r",
+							"    pm.test(\"401 ; STATUS : UNAUTHORIZED\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})}\r",
+							"else if(status_code==402){\r",
+							"    pm.test(\"402 ; STATUS : PAYMENT REQUIRED\", function () {\r",
+							"    pm.response.to.have.status(402);\r",
+							"})}\r",
+							"else if(status_code==403){\r",
+							"    pm.test(\"403 ; STATUS : FORBIDDEN\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"})}\r",
+							"else if(status_code==404){\r",
+							"    pm.test(\"404 ; STATUS : NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})}\r",
+							"else if(status_code==405){\r",
+							"    pm.test(\"405 ; STATUS : METHOD NOT ALLOWED\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"})}\r",
+							"else if(status_code==500){\r",
+							"    pm.test(\"500 ; STATUS : INTERNAL SERVER ERROR\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"})}\r",
+							"else if(status_code==501){\r",
+							"    pm.test(\"501 ; STATUS : NOT IMPLEMENTED\", function () {\r",
+							"    pm.response.to.have.status(501);\r",
+							"})}\r",
+							"else if(status_code==502){\r",
+							"    pm.test(\"502 ; STATUS : BAD GATEWAY\", function () {\r",
+							"    pm.response.to.have.status(502);\r",
+							"})}\r",
+							"else if(status_code==503){\r",
+							"    pm.test(\"503 ; STATUS : SERVICE UNAVAILABLE\", function () {\r",
+							"    pm.response.to.have.status(503);\r",
+							"})}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/studentsDetails/{{id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Technical Skills",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var language_1 = pm.variables.replaceIn(\"{{$randomLocale}}\")\r",
+							"console.log(\"Language 1: \"+language_1)\r",
+							"pm.environment.set(\"language_code_1\",language_1)\r",
+							"\r",
+							"var language_2 = pm.variables.replaceIn(\"{{$randomLocale}}\")\r",
+							"console.log(\"Language 2: \"+language_2)\r",
+							"pm.environment.set(\"language_code_2\",language_2)\r",
+							"\r",
+							"var year_exp = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"console.log(\"Year of Experience: \"+year_exp)\r",
+							"pm.environment.set(\"yearexp\",year_exp)\r",
+							"\r",
+							"const moment = require('moment')\r",
+							"const today = moment()\r",
+							"console.log(today.format(\"YYYY-MM-DD\"))\r",
+							"pm.environment.set(\"lastused\", today.format(\"YYYY-MM-DD\"))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var status_code = pm.response.code\r",
+							"if(status_code==200){\r",
+							"pm.test(\"200 ; STATUS : SUCCESS\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"}\r",
+							"else if(status_code==201){\r",
+							"    pm.test(\"201 ; STATUS : CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})}\r",
+							"else if(status_code==202){\r",
+							"    pm.test(\"202 ; STATUS : ACCEPTED\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"})}\r",
+							"else if(status_code==400){\r",
+							"    pm.test(\"400 ; STATUS : BAD REQUEST\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})}\r",
+							"else if(status_code==401){\r",
+							"    pm.test(\"401 ; STATUS : UNAUTHORIZED\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})}\r",
+							"else if(status_code==402){\r",
+							"    pm.test(\"402 ; STATUS : PAYMENT REQUIRED\", function () {\r",
+							"    pm.response.to.have.status(402);\r",
+							"})}\r",
+							"else if(status_code==403){\r",
+							"    pm.test(\"403 ; STATUS : FORBIDDEN\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"})}\r",
+							"else if(status_code==404){\r",
+							"    pm.test(\"404 ; STATUS : NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})}\r",
+							"else if(status_code==405){\r",
+							"    pm.test(\"405 ; STATUS : METHOD NOT ALLOWED\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"})}\r",
+							"else if(status_code==500){\r",
+							"    pm.test(\"500 ; STATUS : INTERNAL SERVER ERROR\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"})}\r",
+							"else if(status_code==501){\r",
+							"    pm.test(\"501 ; STATUS : NOT IMPLEMENTED\", function () {\r",
+							"    pm.response.to.have.status(501);\r",
+							"})}\r",
+							"else if(status_code==502){\r",
+							"    pm.test(\"502 ; STATUS : BAD GATEWAY\", function () {\r",
+							"    pm.response.to.have.status(502);\r",
+							"})}\r",
+							"else if(status_code==503){\r",
+							"    pm.test(\"503 ; STATUS : SERVICE UNAVAILABLE\", function () {\r",
+							"    pm.response.to.have.status(503);\r",
+							"})}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"id\": 1, \r\n\"language\": [ \r\n\"{{language_code_1}}\", \r\n\"{{language_code_2}}\" \r\n], \r\n\"yearexp\": \"{{yearexp}}\", \r\n\"lastused\": \"{{lastused}}\", \r\n\"st_id\": {{id}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/technicalskills",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"technicalskills"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Student Address",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var house_number = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"console.log(\"House Number: \"+house_number)\r",
+							"pm.environment.set(\"House_Number\",house_number)\r",
+							"\r",
+							"var city = pm.variables.replaceIn(\"{{$randomCity}}\")\r",
+							"console.log(\"CITY: \"+city)\r",
+							"pm.environment.set(\"City\",city)\r",
+							"\r",
+							"var state = pm.variables.replaceIn(\"{{$randomStreetName}}\")\r",
+							"console.log(\"STATE: \"+state)\r",
+							"pm.environment.set(\"State\",state)\r",
+							"\r",
+							"var country = pm.variables.replaceIn(\"{{$randomCountry}}\")\r",
+							"console.log(\"COUNTRY: \"+country)\r",
+							"pm.environment.set(\"Country\",country)\r",
+							"\r",
+							"var std_code = pm.variables.replaceIn(\"{{$randomCountryCode}}\")\r",
+							"console.log(\"STD CODE 1: \"+std_code )\r",
+							"pm.environment.set(\"Std_Code\",std_code )\r",
+							"\r",
+							"var home = pm.variables.replaceIn(\"{{$randomStreetAddress}}\")\r",
+							"console.log(\"HOME 1: \"+home )\r",
+							"pm.environment.set(\"Home\",home)\r",
+							"\r",
+							"var mobile = pm.variables.replaceIn(\"{{$randomPhoneNumberExt}}\")\r",
+							"console.log(\"MOBILE No. 1: \"+mobile )\r",
+							"pm.environment.set(\"Mobile\",mobile)\r",
+							"\r",
+							"var std_code1 = pm.variables.replaceIn(\"{{$randomCountryCode}}\")\r",
+							"console.log(\"STD CODE 2: \"+std_code1 )\r",
+							"pm.environment.set(\"Std_Code_1\",std_code1 )\r",
+							"\r",
+							"var home1 = pm.variables.replaceIn(\"{{$randomStreetAddress}}\")\r",
+							"console.log(\"HOME 2: \"+home1 )\r",
+							"pm.environment.set(\"Home_1\",home1)\r",
+							"\r",
+							"var mobile1 = pm.variables.replaceIn(\"{{$randomPhoneNumberExt}}\")\r",
+							"console.log(\"MOBILE No. 2: \"+mobile1 )\r",
+							"pm.environment.set(\"Mobile_1\",mobile1)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var status_code = pm.response.code\r",
+							"if(status_code==200){\r",
+							"pm.test(\"200 ; STATUS : SUCCESS\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json()\r",
+							"pm.test(\"Status Validation\", function () {\r",
+							"    pm.expect(jsonData.status).to.eql(\"true\");\r",
+							"});\r",
+							"pm.test(\"MSG Validation\", function () {\r",
+							"    pm.expect(jsonData.msg).to.eql(\"Add  data success\");\r",
+							"});\r",
+							"pm.t\r",
+							"}\r",
+							"else if(status_code==201){\r",
+							"    pm.test(\"201 ; STATUS : CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})}\r",
+							"else if(status_code==202){\r",
+							"    pm.test(\"202 ; STATUS : ACCEPTED\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"})}\r",
+							"else if(status_code==400){\r",
+							"    pm.test(\"400 ; STATUS : BAD REQUEST\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})}\r",
+							"else if(status_code==401){\r",
+							"    pm.test(\"401 ; STATUS : UNAUTHORIZED\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})}\r",
+							"else if(status_code==402){\r",
+							"    pm.test(\"402 ; STATUS : PAYMENT REQUIRED\", function () {\r",
+							"    pm.response.to.have.status(402);\r",
+							"})}\r",
+							"else if(status_code==403){\r",
+							"    pm.test(\"403 ; STATUS : FORBIDDEN\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"})}\r",
+							"else if(status_code==404){\r",
+							"    pm.test(\"404 ; STATUS : NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})}\r",
+							"else if(status_code==405){\r",
+							"    pm.test(\"405 ; STATUS : METHOD NOT ALLOWED\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"})}\r",
+							"else if(status_code==500){\r",
+							"    pm.test(\"500 ; STATUS : INTERNAL SERVER ERROR\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"})}\r",
+							"else if(status_code==501){\r",
+							"    pm.test(\"501 ; STATUS : NOT IMPLEMENTED\", function () {\r",
+							"    pm.response.to.have.status(501);\r",
+							"})}\r",
+							"else if(status_code==502){\r",
+							"    pm.test(\"502 ; STATUS : BAD GATEWAY\", function () {\r",
+							"    pm.response.to.have.status(502);\r",
+							"})}\r",
+							"else if(status_code==503){\r",
+							"    pm.test(\"503 ; STATUS : SERVICE UNAVAILABLE\", function () {\r",
+							"    pm.response.to.have.status(503);\r",
+							"})}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\"Permanent_Address\": { \r\n\"House_Number\": \"{{House_Number}}\",\r\n\"City\": \"{{City}}\",\r\n \"State\": \"{{State}}\", \r\n\"Country\": \"{{Country}}\",\r\n\"PhoneNumber\": [ \r\n{ \r\n\"Std_Code\": \"{{Std_Code}}\",\r\n\"Home\": \"{{Home}}\",\r\n \"Mobile\": \"{{Mobile}}\" \r\n},\r\n{ \r\n\"Std_Code\": \"{{Std_Code_1}}\",\r\n\"Home\": \"{{Home_1}}\", \r\n\"Mobile\": \"{{Mobile_1}}\" \r\n} \r\n] \r\n},\r\n\"stId\": {{id}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/addresses",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"addresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FINAL STUDENT DETAILS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var status_code = pm.response.code\r",
+							"if(status_code==200){\r",
+							"pm.test(\"200 ; STATUS : SUCCESS\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json()\r",
+							"pm.test(\"Validation of Language 1\" ,function () {\r",
+							"    pm.expect(jsonData.data.TechnicalDetails[0].language[0]).to.eql(pm.environment.get(\"language_code_1\"));\r",
+							"});\r",
+							"pm.test(\"Validation of Language 2\" ,function () {\r",
+							"    pm.expect(jsonData.data.TechnicalDetails[0].language[1]).to.eql(pm.environment.get(\"language_code_2\"));\r",
+							"});\r",
+							"pm.test(\"Validation of Year of Experience\", function () {\r",
+							"    pm.expect(jsonData.data.TechnicalDetails[0].yearexp).to.eql(pm.environment.get(\"yearexp\"));\r",
+							"});\r",
+							"pm.test(\"Validation of House Number\", function () {\r",
+							"    pm.expect(jsonData.data.Address[0].Permanent_Address.House_Number).to.eql(pm.environment.get(\"House_Number\"));\r",
+							"});\r",
+							"pm.test(\"Validation of City\", function () {\r",
+							"    pm.expect(jsonData.data.Address[0].Permanent_Address.City).to.eql(pm.environment.get(\"City\"));\r",
+							"});\r",
+							"pm.test(\"Validation of Country\", function () {\r",
+							"    pm.expect(jsonData.data.Address[0].Permanent_Address.Country).to.eql(pm.environment.get(\"Country\"));\r",
+							"});\r",
+							"pm.test(\"Validation of Mobile No. 1\" ,function () {\r",
+							"    pm.expect(jsonData.data.Address[0].Permanent_Address.PhoneNumber[0].Mobile).to.eql(pm.environment.get(\"Mobile\"));\r",
+							"});\r",
+							"pm.test(\"Validation of Mobile No. 2\" ,function () {\r",
+							"    pm.expect(jsonData.data.Address[0].Permanent_Address.PhoneNumber[1].Mobile).to.eql(pm.environment.get(\"Mobile_1\"));\r",
+							"});\r",
+							"pm.test(\"Validation of Current Address\" ,function () {\r",
+							"    pm.expect(jsonData.data.Address[0].Current_Address).to.eql(null);\r",
+							"});\r",
+							"}\r",
+							"else if(status_code==201){\r",
+							"    pm.test(\"201 ; STATUS : CREATED\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})}\r",
+							"else if(status_code==202){\r",
+							"    pm.test(\"202 ; STATUS : ACCEPTED\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"})}\r",
+							"else if(status_code==400){\r",
+							"    pm.test(\"400 ; STATUS : BAD REQUEST\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})}\r",
+							"else if(status_code==401){\r",
+							"    pm.test(\"401 ; STATUS : UNAUTHORIZED\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})}\r",
+							"else if(status_code==402){\r",
+							"    pm.test(\"402 ; STATUS : PAYMENT REQUIRED\", function () {\r",
+							"    pm.response.to.have.status(402);\r",
+							"})}\r",
+							"else if(status_code==403){\r",
+							"    pm.test(\"403 ; STATUS : FORBIDDEN\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"})}\r",
+							"else if(status_code==404){\r",
+							"    pm.test(\"404 ; STATUS : NOT FOUND\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})}\r",
+							"else if(status_code==405){\r",
+							"    pm.test(\"405 ; STATUS : METHOD NOT ALLOWED\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"})}\r",
+							"else if(status_code==500){\r",
+							"    pm.test(\"500 ; STATUS : INTERNAL SERVER ERROR\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"})}\r",
+							"else if(status_code==501){\r",
+							"    pm.test(\"501 ; STATUS : NOT IMPLEMENTED\", function () {\r",
+							"    pm.response.to.have.status(501);\r",
+							"})}\r",
+							"else if(status_code==502){\r",
+							"    pm.test(\"502 ; STATUS : BAD GATEWAY\", function () {\r",
+							"    pm.response.to.have.status(502);\r",
+							"})}\r",
+							"else if(status_code==503){\r",
+							"    pm.test(\"503 ; STATUS : SERVICE UNAVAILABLE\", function () {\r",
+							"    pm.response.to.have.status(503);\r",
+							"})}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/FinalStudentDetails/{{id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"FinalStudentDetails",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
